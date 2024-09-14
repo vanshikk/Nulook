@@ -1,0 +1,27 @@
+{% extends "app/layout.html" %}
+{% load static %}
+{% block content %}
+
+<main class="content">
+    {% if user.is_authenticated %}
+    <h1>{{ title }}</h1>
+    <p>{{ message }}</p>
+
+    <ul class="wishlist_item">
+        {% for item in wishlist_items %}
+        <li>
+            <img src="{% static 'images/'|add:item.product.image %}" alt="{{ item.product.name }}">
+            <span>{{ item.product.name }}</span>
+            <span>${{ item.product.price }}</span>
+        </li>
+        {% empty %}
+        <li>No items in your wishlist.</li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p>You need to be logged in to view your wishlist. <a href="{% url 'login' %}">Log in here</a>.</p>
+    {% endif %}
+</main>
+
+
+{% endblock %}

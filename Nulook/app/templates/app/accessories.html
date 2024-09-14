@@ -1,0 +1,69 @@
+{% extends "app/layout.html" %}
+{% load static %}
+{% block content %}
+
+<main class="content">
+    <form method="get" action="{% url 'accessories' %}" class="filter_form">
+        <!-- Color Filter -->
+        <div class="filter">
+            <label for="color">Color:</label>
+            <select id="color" name="color">
+                <option value="">All Colors</option>
+                <option value="Silver">Silver</option>
+                <option value="Gold">Gold</option>
+                <option value="Rose Gold">Rose Gold</option>
+                <option value="Bronze">Bronze</option>
+                <option value="Brown">Brown</option>
+                <option value="Orange">Orange</option>
+                <!-- Add more color options as needed -->
+            </select>
+        </div>
+
+
+        <!-- Type Filter -->
+        <div class="filter">
+            <label for="type">Type:</label>
+            <select id="type" name="type">
+                <option value="">All Types</option>
+                <option value="Necklace">Necklace</option>
+                <option value="Bracelet">Bracelet</option>
+                <option value="Earrings">Earrings</option>
+                <!-- Add more type options as needed -->
+            </select>
+        </div>
+
+        <!-- Price Order Filter -->
+        <div class="filter">
+            <label for="price_order">Price Order:</label>
+            <select id="price_order" name="price_order">
+                <option value="">Sort by Price</option>
+                <option value="cheapest_first">Cheapest First</option>
+                <option value="expensive_first">Expensive First</option>
+            </select>
+        </div>
+
+        <!-- Apply Filters Button -->
+        <div class="filter">
+            <button type="submit">Apply Filters</button>
+        </div>
+    </form>
+    <div class="product_list">
+        {% if products %}
+        {% for product in products %}
+        <div class="product_item">
+            <img src="{{ product.image.url }}" alt="{{ product.name }}">
+            <h3>{{ product.name }}</h3>
+            <p>{{ product.description }}</p>
+            <p>${{ product.price }} FJD</p>
+            <a href="{% url 'add_to_wishlist' product.id %}" id="heart-link"><img src="{% static 'images/heart.png' %}" id="heart" class="heart-icon" alt="Heart Icon"></a>
+        </div>
+        {% endfor %}
+        {% else %}
+        <p>No Accessory Products Found.</p>
+        {% endif %}
+    </div>
+
+
+</main>
+
+{% endblock %}

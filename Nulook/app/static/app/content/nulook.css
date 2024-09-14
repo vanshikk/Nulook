@@ -1,0 +1,118 @@
+/*
+colours
+Hot Pink:
+rgb(255, 0, 102)
+#ff0066
+hsl(336, 100%, 50%)
+*/
+
+
+/*layout.html*/
+body 
+{
+    background-color:darkblue;
+    display: flex;
+    flex-direction: column;
+}
+html, body 
+{
+    height: 100%;
+    margin: 0;
+    padding:0;
+}
+@font-face 
+{
+    font-family: 'MyCustomFont';
+    src: url('{% static "fonts/Pacifico-Regular.ttf" %}') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+.pacifico-regular 
+{
+    font-family: "Pacifico", cursive;
+    font-weight: 400;
+    font-style: italic;
+    font-size:3em;
+    
+}
+header
+{
+    width: 100%;
+    height: auto;
+    background-color:rgb(255, 0, 102);
+    margin:0;
+    
+}
+
+.nulook_logo
+{
+    display:flex;
+    justify-content:flex-start;
+    align-items:flex-start;
+    padding:0;
+    margin-top:-15px;
+    font-size: 3em;
+}
+.nulook_logo a
+{
+    color:white;
+    text-decoration:none;
+    text-align:left;
+    font-size: 3em;
+}
+.nulook_logo a:visited
+{
+    color:white;
+    text-decoration: none;
+}
+
+.nulook_logo h1 
+{
+    color:white;
+    font-size: 3em;
+    margin-left: 20px;
+    
+}
+.icon_bar
+{
+    text-align:right;
+    display:flex;
+    justify-content:flex-end;
+}
+.icons
+{
+    width: 30px;
+    height: 30px;
+    filter: invert(1);
+}
+
+ul.user_controls li
+{
+    display: flex;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+main
+{
+    background-color: lightgrey;
+    margin-top:0;
+}
+footer {
+    background-color: rgb(255, 0, 110);
+    margin-top: 0; /* Remove margin at the top */
+    padding: 0;
+    width:100%;
+    
+    height:auto;
+    color:white;
+    font-size:1.5em;
+    text-align:center;
+}
+.nulook_logo a
+{
+    color:white;
+    text-decoration:none;
+    text-align:left;
+    font-size: 3em;
+}

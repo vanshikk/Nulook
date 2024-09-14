@@ -1,0 +1,24 @@
+{% extends "app/layout.html" %}
+
+{% block content %}
+<main class="content">
+    <div class="search-results">
+        <h2>{{ message }}</h2>
+
+        {% if products %}
+        <div class="product_list">
+            {% for product in products %}
+            <div class="product_item">
+                <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                <h3>{{ product.name }}</h3>
+                <p>{{ product.description }}</p>
+                <p>${{ product.price }} FJD</p>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <p>No products found matching your search.</p>
+        {% endif %}
+    </div>
+</main>
+{% endblock %}

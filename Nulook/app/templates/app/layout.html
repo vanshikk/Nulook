@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }} - Nu Look</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'app/content/bootstrap.min.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'app/content/site.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'app/content/nulook.css' %}" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <script src="{% static 'app/scripts/modernizr-2.6.2.js' %}"></script>
+</head>
+
+
+<body>
+
+    <header>
+        <div class="top_container">
+            <a href="{% url 'home' %}" class="nulook_logo">
+                <h1 class="pacifico-regular">NL</h1>
+                <h1>NuLook</h1>
+            </a>
+
+            <div class="icon_bar">
+                <ul class="user_controls">
+                    <li><a href="{% url 'wishlist' %}" class="nav_tabs"><img class="icons" src="{% static 'images/favorite-heart-outline-button.png' %}" alt="wishlist" /></a></li>
+                    <li><a href="{% url 'cart' %}" class="nav_tabs"><img class="icons" src="{% static 'images/shopping-basket-button.png' %}" alt="cart" /></a></li>
+                    <li><a href="{% url 'account' %}" class="nav_tabs"><img class="icons" src="{% static 'images/user-shape.png' %}" alt="account" /></a></li>
+                </ul>
+            </div>
+
+        </div>
+
+
+
+        <div class="navbar">
+            <ul class="searchbar">
+                <li>
+                    <form method="get" action="{% url 'search' %}" class="search-form">
+                        <input type="text" name="q" placeholder="Search" />
+                        <button type="submit"><img src="{% static 'images/search.png' %}" alt="search" /></button>
+                    </form>
+                </li>
+            </ul>
+
+            <ul class="navlist">
+
+                <li><a href="{% url 'women' %}" class="nav_tabs">Women's</a></li>
+                <li><a href="{% url 'men' %}" class="nav_tabs">Men's</a></li>
+                <li><a href="{% url 'kids' %}" class="nav_tabs">Kids</a></li>
+                <li><a href="{% url 'shoes' %}" class="nav_tabs">Shoes</a></li>
+                <li><a href="{% url 'accessories' %}" class="nav_tabs">Accessories</a></li>
+
+            </ul>
+            <ul class="login_btn">
+                {% include 'app/loginpartial.html' %}
+            </ul>
+        </div>
+    </header>
+
+    {% block content %}{% endblock %}
+
+    <footer>
+        
+        <p>&copy; {{ year }} - Nulook</p>
+    </footer>
+
+</body>
+
+
+</html>

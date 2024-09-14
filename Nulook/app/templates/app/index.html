@@ -1,0 +1,22 @@
+{% extends "app/layout.html" %}
+{% load static %}
+{% block content %}
+
+<main class="content">
+    <h2 class="pacifico-regular home_title">Embark on your fashion journey with us</h2>
+
+    <div class="ad">
+        <!--<a href="{% url 'women' %}">-->
+            <img src="{% static 'images/women_ad.jpg' %}" alt="womens ad" />
+            <h3>Women's Fashion</h3>
+        <!--</a>-->
+    </div>
+    <div class="ad">
+        <!--<a href="{% url 'men' %}">-->
+            <img src="{% static 'images/men_ad.jpg' %}" alt="mens ad" />
+            <h3>Men's Fashion</h3>
+        <!--</a>-->
+    </div>
+
+</main>
+{% endblock %}

@@ -1,0 +1,82 @@
+{% extends "app/layout.html" %}
+{% load static %}
+{% block content %}
+
+<main class="content">
+    <form method="get" action="{% url 'shoes' %}" class="filter_form">
+        <!-- Color Filter -->
+        <div class="filter">
+            <label for="color">Color:</label>
+            <select id="color" name="color">
+                <option value="">All Colors</option>
+                <option value="White">White</option>
+                <option value="Pink">Pink</option>
+                <option value="Black">Black</option>
+                <option value="Beige">Beige</option>
+                <option value="Brown">Brown</option>
+                <option value="Orange">Orange</option>
+                <!-- Add more color options as needed -->
+            </select>
+        </div>
+
+        <!-- Size Filter -->
+        <div class="filter">
+            <label for="size">Size:</label>
+            <select id="size" name="size">
+                <option value="">All Sizes</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <!-- Add more size options as needed -->
+            </select>
+        </div>
+
+        <!-- Type Filter -->
+        <div class="filter">
+            <label for="type">Type:</label>
+            <select id="type" name="type">
+                <option value="">All Types</option>
+                <option value="Pants">Pants</option>
+                <option value="Dress">Dress</option>
+                <option value="Skirt">Skirt</option>
+                <!-- Add more type options as needed -->
+            </select>
+        </div>
+
+        <!-- Price Order Filter -->
+        <div class="filter">
+            <label for="price_order">Price Order:</label>
+            <select id="price_order" name="price_order">
+                <option value="">Sort by Price</option>
+                <option value="cheapest_first">Cheapest First</option>
+                <option value="expensive_first">Expensive First</option>
+            </select>
+        </div>
+
+        <!-- Apply Filters Button -->
+        <div class="filter">
+            <button type="submit">Apply Filters</button>
+        </div>
+    </form>
+    <div class="product_list">
+        {% if products %}
+        {% for product in products %}
+        <div class="product_item">
+            <img src="{{ product.image.url }}" alt="{{ product.name }}">
+            <h3>{{ product.name }}</h3>
+            <p>{{ product.description }}</p>
+            <p>${{ product.price }} FJD</p>
+            <a href="{% url 'add_to_wishlist' product.id %}" id="heart-link"><img src="{% static 'images/heart.png' %}" id="heart" class="heart-icon" alt="Heart Icon"></a>
+        </div>
+        {% endfor %}
+        {% else %}
+        <p>No Kid's Products Found.</p>
+        {% endif %}
+    </div>
+</main>
+
+
+{% endblock %}
