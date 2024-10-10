@@ -40,6 +40,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 ]
 
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
 # Middleware framework
 # https://docs.djangoproject.com/en/2.1/topics/http/middleware/
 MIDDLEWARE = [
