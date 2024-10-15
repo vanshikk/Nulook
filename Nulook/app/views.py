@@ -84,7 +84,7 @@ def women(request):
     assert isinstance(request, HttpRequest)
 
     # Fetch the 'womens' category using lowercase
-    womens_category = get_object_or_404(Category, name='womens')
+    womens_category = get_object_or_404(Category, category_name='womens')
 
     # Fetch products belonging to the 'womens' category
     products = Product.objects.filter(category=womens_category)
@@ -124,7 +124,7 @@ def men(request):
     assert isinstance(request, HttpRequest)
 
     # Fetch the 'mens' category using lowercase
-    mens_category = get_object_or_404(Category, name='mens')
+    mens_category = get_object_or_404(Category, category_name='mens')
 
     # Fetch products belonging to the 'mens' category
     products = Product.objects.filter(category=mens_category)
@@ -163,7 +163,7 @@ def kids(request):
     assert isinstance(request, HttpRequest)
 
     # Fetch the 'kids' category using lowercase
-    kids_category = get_object_or_404(Category, name='kids')
+    kids_category = get_object_or_404(Category, category_name='kids')
 
     # Fetch products belonging to the 'kids' category
     products = Product.objects.filter(category=kids_category)
@@ -202,7 +202,7 @@ def shoes(request):
     assert isinstance(request, HttpRequest)
 
     # Fetch the 'shoes' category using lowercase
-    shoes_category = get_object_or_404(Category, name='shoes')
+    shoes_category = get_object_or_404(Category, category_name='shoes')
 
     # Fetch products belonging to the 'shoes' category
     products = Product.objects.filter(category=shoes_category)
@@ -240,7 +240,7 @@ def accessories(request):
     assert isinstance(request, HttpRequest)
 
     # Fetch the 'accessories' category using lowercase
-    accessories_category = get_object_or_404(Category, name='accessories')
+    accessories_category = get_object_or_404(Category, category_name='accessories')
 
     # Fetch products belonging to the 'accessories' category
     products = Product.objects.filter(category=accessories_category)
