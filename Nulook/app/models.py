@@ -4,7 +4,7 @@ Definition of models.
 
 from django.db import models
 from django.contrib.auth.models import AbstractUser, Group, Permission
-
+from django.contrib.auth.hashers import make_password
 
 class Colour(models.Model):
     color_name = models.CharField(max_length=50)
@@ -37,6 +37,14 @@ class Customer(models.Model):
     customer_last_name = models.CharField(max_length=100, blank=True, null=True)
     customer_email = models.EmailField(unique=True, null=True, blank=True)  # Allow null values
     customer_password = models.CharField(max_length=255, blank=True, null=True)
+
+    def set_password(self, raw_password):
+        self.password = make_password(raw_password)
+
+    def check_password(self, raw_password):
+        from django.contrib.auth.hashers import check_password
+        return check_password(raw_password, self.password)
+
     customer_gender = models.CharField(
         max_length=20, 
         choices=[('Male', 'Male'), ('Female', 'Female'), ('Rather Not Say', 'Rather Not Say')], 
@@ -55,6 +63,14 @@ class Employee(models.Model):
     employee_last_name = models.CharField(max_length=100, null=True)
     employee_email = models.EmailField(unique=True, null=True)
     employee_password = models.CharField(max_length=255, null=True)
+
+    def set_password(self, raw_password):
+        self.password = make_password(raw_password)
+
+    def check_password(self, raw_password):
+        from django.contrib.auth.hashers import check_password
+        return check_password(raw_password, self.password)
+
     employee_gender = models.CharField(
         max_length=20, 
         choices=[('Male', 'Male'), ('Female', 'Female'), ('Rather Not Say', 'Rather Not Say')]
