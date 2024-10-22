@@ -440,3 +440,53 @@ ul.wishlist_item
     width: 40px;
     height:auto;
 }
+
+/* account.html Styles */
+.account-container {
+    margin: 50px auto;
+    width: 60%;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    font-family: 'Arial', sans-serif;
+}
+
+    .account-container h2 {
+        font-family: 'Pacifico', cursive;
+        font-size: 36px;
+        margin-bottom: 20px;
+    }
+
+.account-details p {
+    font-size: 18px;
+    margin: 10px 0;
+}
+
+    .account-details p strong {
+        color: #333;
+    }
+
+.account-actions {
+    margin-top: 20px;
+}
+
+    .account-actions .btn {
+        padding: 10px 20px;
+        border-radius: 5px;
+        text-decoration: none;
+        font-size: 16px;
+        color: white;
+    }
+
+    .account-actions .btn-primary {
+        background-color: #4CAF50;
+    }
+
+    .account-actions .btn-secondary {
+        background-color: #007BFF;
+    }
+
+    .account-actions .btn:hover {
+        opacity: 0.8;
+    }

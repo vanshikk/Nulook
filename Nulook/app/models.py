@@ -54,6 +54,9 @@ class Customer(models.Model):
     customer_phone = models.CharField(max_length=15, blank=True, null=True)
     payment_method = models.OneToOneField('PaymentMethod', on_delete=models.CASCADE, related_name='customer_payment_method', blank=True, null=True)
 
+    def __str__(self):
+        return self.customer_username
+
 
 
 class Employee(models.Model):
@@ -78,6 +81,10 @@ class Employee(models.Model):
     employee_date_of_birth = models.DateField( null=True)
     employee_phone = models.CharField(max_length=15, null=True)
 
+
+    def __str__(self):
+        return self.employee_username
+
 class Product(models.Model):
     product_id = models.AutoField(primary_key=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
@@ -91,6 +98,9 @@ class Product(models.Model):
     def total_stock(self):
         return sum(size.stock for size in self.product_sizes.all())  # Aggregates stock from all sizes
 
+    def __str__(self):
+        return self.product_name
+
 class ProductSize(models.Model):
     product = models.ForeignKey(Product, related_name='product_sizes', on_delete=models.CASCADE)
     size = models.CharField(max_length=50)  # e.g., "S", "M", "L"
@@ -98,6 +108,9 @@ class ProductSize(models.Model):
 
     class Meta:
         unique_together = ('product', 'size')  # Ensures each product has unique size entries
+
+    def __str__(self):
+        return self.product_name
 
 
 

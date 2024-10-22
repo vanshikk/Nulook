@@ -61,11 +61,12 @@
         {% if products %}
         {% for product in products %}
         <div class="product_item">
-            <img src="{{ product.image.url }}" alt="{{ product.name }}">
-            <h3>{{ product.name }}</h3>
-            <p>{{ product.description }}</p>
-            <p>${{ product.price }} FJD</p>
-            <a href="{% url 'add_to_wishlist' product.id %}" id="heart-link"><img src="{% static 'images/heart.png' %}" id="heart" class="heart-icon" alt="Heart Icon"></a>
+            <img src="{{ product.product_image.url }}" alt="{{ product.name }}">
+            <h3>{{ product.product_name }}</h3>
+            <p>{{ product.product_description }}</p>
+            <p>${{ product.product_price }} FJD</p>
+            <a href="{% url 'add_to_wishlist' product.product_id %}" id="heart-link"><img src="{% static 'images/heart.png' %}" id="heart" class="heart-icon" alt="Heart Icon"></a>
+
         </div>
         {% endfor %}
         {% else %}
