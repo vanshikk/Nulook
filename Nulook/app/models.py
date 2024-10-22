@@ -4,7 +4,7 @@ Definition of models.
 
 from django.db import models
 from django.contrib.auth.models import AbstractUser, Group, Permission
-
+from django.contrib.auth.hashers import make_password
 
 class Colour(models.Model):
     color_name = models.CharField(max_length=50)
@@ -37,6 +37,14 @@ class Customer(models.Model):
     customer_last_name = models.CharField(max_length=100, blank=True, null=True)
     customer_email = models.EmailField(unique=True, null=True, blank=True)  # Allow null values
     customer_password = models.CharField(max_length=255, blank=True, null=True)
+
+    def set_password(self, raw_password):
+        self.password = make_password(raw_password)
+
+    def check_password(self, raw_password):
+        from django.contrib.auth.hashers import check_password
+        return check_password(raw_password, self.password)
+
     customer_gender = models.CharField(
         max_length=20, 
         choices=[('Male', 'Male'), ('Female', 'Female'), ('Rather Not Say', 'Rather Not Say')], 
@@ -45,6 +53,9 @@ class Customer(models.Model):
     customer_date_of_birth = models.DateField( null=True)
     customer_phone = models.CharField(max_length=15, blank=True, null=True)
     payment_method = models.OneToOneField('PaymentMethod', on_delete=models.CASCADE, related_name='customer_payment_method', blank=True, null=True)
+
+    def __str__(self):
+        return self.customer_username
 
 
 
@@ -55,12 +66,24 @@ class Employee(models.Model):
     employee_last_name = models.CharField(max_length=100, null=True)
     employee_email = models.EmailField(unique=True, null=True)
     employee_password = models.CharField(max_length=255, null=True)
+
+    def set_password(self, raw_password):
+        self.password = make_password(raw_password)
+
+    def check_password(self, raw_password):
+        from django.contrib.auth.hashers import check_password
+        return check_password(raw_password, self.password)
+
     employee_gender = models.CharField(
         max_length=20, 
         choices=[('Male', 'Male'), ('Female', 'Female'), ('Rather Not Say', 'Rather Not Say')]
     , null=True)
     employee_date_of_birth = models.DateField( null=True)
     employee_phone = models.CharField(max_length=15, null=True)
+
+
+    def __str__(self):
+        return self.employee_username
 
 class Product(models.Model):
     product_id = models.AutoField(primary_key=True)
@@ -75,6 +98,9 @@ class Product(models.Model):
     def total_stock(self):
         return sum(size.stock for size in self.product_sizes.all())  # Aggregates stock from all sizes
 
+    def __str__(self):
+        return self.product_name
+
 class ProductSize(models.Model):
     product = models.ForeignKey(Product, related_name='product_sizes', on_delete=models.CASCADE)
     size = models.CharField(max_length=50)  # e.g., "S", "M", "L"
@@ -82,6 +108,9 @@ class ProductSize(models.Model):
 
     class Meta:
         unique_together = ('product', 'size')  # Ensures each product has unique size entries
+
+    def __str__(self):
+        return self.product_name
 
 
 

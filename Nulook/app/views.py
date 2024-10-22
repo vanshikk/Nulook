@@ -2,7 +2,7 @@
 Definition of views.
 """
 from django.contrib.auth.decorators import login_required
-from .models import Product, Category,Wishlist, WishlistItem
+from .models import Customer, Product, Category,Wishlist, WishlistItem
 from datetime import datetime
 from django.shortcuts import get_object_or_404, redirect, render
 from django.http import HttpRequest
@@ -287,9 +287,16 @@ def cart(request):
     )
 @login_required
 def wishlist(request):
-    """Render the user's wishlist."""
+    """Render the customer's wishlist."""
     user = request.user
-    wishlist = Wishlist.objects.filter(user=user).first()
+    try:
+        # Retrieve the customer associated with the logged-in user
+        customer = Customer.objects.get(user=user)
+    except Customer.DoesNotExist:
+        customer = None
+
+    # Fetch the wishlist associated with the customer
+    wishlist = Wishlist.objects.filter(customer=customer).first() if customer else None
     wishlist_items = WishlistItem.objects.filter(wishlist=wishlist) if wishlist else []
 
     return render(request, 'app/wishlist.html', {
@@ -302,7 +309,7 @@ def wishlist(request):
 def add_to_wishlist(request, product_id):
     """Add a product to the user's wishlist."""
     user = request.user
-    product = get_object_or_404(Product, id=product_id)
+    product = get_object_or_404(Product, product_id=product_id)
     
     # Get or create the wishlist for the user
     wishlist, created = Wishlist.objects.get_or_create(user=user)
